@@ -14,13 +14,13 @@ class StockData extends Component {
   }
 
   handleSubmit(event){
-    //this.setState()
     fetch(`https://jsonmock.hackerrank.com/api/stocks?date=${this.state.input}`)
       .then(res => res.json())
       .then(d => {
-        //console.log(d)
+        console.log(d)
         if (d === undefined){
           this.setState({status: "invalid"})
+          //difficulty handling dates that don't return response and invalid inputs
         }
         else {
           this.setState({stock: d.data[0]})
@@ -42,11 +42,12 @@ class StockData extends Component {
         </section>
         {this.state.status === "invalid" ? <div className="mt-50 slide-up-fade-in" id="no-result" data-testid="no-result"></div> : 
         <ul className="mt-50 slide-up-fade-in styled" id="stockData" data-testid="stock-data">
-          <li className="py-10"></li>
+          <li className="py-10">
           <li>Open: {this.state.stock.open}</li>
           <li>Close: {this.state.stock.close}</li>
           <li>High: {this.state.stock.high}</li>
           <li>Low: {this.state.stock.low}</li>
+          </li>
         </ul>
         }
         
